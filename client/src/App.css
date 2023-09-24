@@ -42,11 +42,17 @@ form{
 }
 .name , .email , .password {
   padding-left: 5%;
-      width: 60%;
-      height : 2.5vw;
-      margin: 1% auto ;
-      border-radius: 10px;
-      border: 1px solid;
+  width: 60%;
+  height : 2.5vw;
+  margin: 1% auto ;
+  border-radius: 10px;
+  border: 1px solid;
+}
+.name::before{
+  content: "Name";
+  color: black;
+  z-index: 3;
+  background-color: black ;
 }
 .login{
   width: 80%;
@@ -54,6 +60,7 @@ form{
   font-size: 2.5vw;
 
 }
+
 .submit{
   padding: 1.5% 3.5%;
   background-color: var(--primary-color);
@@ -86,7 +93,7 @@ form{
   }
   .name , .email , .password{
     width: 70%;
-    height: 9vw ;
+    height: 91vw ;
   }
   
 }
