@@ -5,7 +5,7 @@ function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-//Sending signup data to backend
+//Sending login data to backend
   async function loginUser(event){
     event.preventDefault()
     const response = await fetch("http://localhost:4000/api/login",{
@@ -25,7 +25,7 @@ function App() {
   return (
     <>
 
-    {/* registration part start here  */}
+    {/* login part start here  */}
       <div className="register">
 
         {/* Login heading  here  */}
@@ -55,7 +55,7 @@ function App() {
         {/* form ends here  */}
 
       </div>
-      {/* registration part ends here  */}
+      {/* signin part ends here  */}
 
 
     </>

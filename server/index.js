@@ -45,5 +45,5 @@ app.post('/api/login', async (req , resp )=>{
     
 })
 app.listen(4000 , ()=>{
-    console.log("running on port ${4000}")
+    console.log(`running on port ${4000}`)
 })
