@@ -34,8 +34,9 @@ app.post('/api/register', async (req , resp )=>{
     }
 })
 app.post('/api/login', async (req , resp )=>{
-    const {email, password } = req.body;
-    const user = await User.findOne({email:email,password: password})
+    const {email_in, password_in } = req.body;
+    console.log(req.body.email) 
+    const user = await User.findOne({email:req.body.email,password: req.body.password})
     if(user){
         resp.json({status:"ok",user:"true"})
     }
