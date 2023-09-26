@@ -1,0 +1,92 @@
+:root {
+  --primary-color: #112d4e; /* Define a root variable for primary color */
+}
+
+*{
+  margin: 0;
+  padding: 0;
+}
+body{
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.register{
+  width: 40vw;
+  padding-top: 5%;
+  /* height: 50vh; */
+  display: flex;
+  /* font-family: outfirt; */
+  /* justify-content: center; */
+  align-items: center;
+  /* border: 1px solid black; */
+  box-shadow: 0px 0px  1000px rgba(11, 0, 40, 0.657) ;
+  border-radius: 30px;
+  flex-direction: column;
+
+}
+
+form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  
+}
+.name , .email , .password {
+  padding-left: 5%;
+      width: 60%;
+      height : 2.5vw;
+      margin: 1% auto ;
+      border-radius: 10px;
+      border: 1px solid;
+}
+.login{
+  width: 80%;
+  margin-bottom: 3%;
+  font-size: 2.5vw;
+
+}
+.submit{
+  padding: 1.5% 3.5%;
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 12px;
+  margin: 2%;
+  cursor: pointer;
+  border: none;
+}
+
+@media screen and (max-width:1000px) {
+  .register{
+    width: 80vw;
+  }
+  .login{
+    font-size: 6.5vw;
+  }
+  .name , .email , .password{
+    height: 6.5vw;
+    margin:2% auto ;
+  } 
+  .submit{
+    padding: 3%  7%;
+  }
+  
+}
+@media screen and (max-width:500px) {
+  .register{
+    width: 90vw;
+  }
+  .name , .email , .password{
+    width: 70%;
+    height: 9vw ;
+  }
+  
+}
