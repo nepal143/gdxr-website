@@ -24,6 +24,7 @@ app.post('/api/register', async (req , resp )=>{
         const { name, email, password } = req.body;
         const user = await User.create({name,email,password})
         console.log("passed")
+        resp.json({status:"ok"})
     }
     catch(err){
         // resp.json({status:"error",error:{err}})
@@ -31,6 +32,16 @@ app.post('/api/register', async (req , resp )=>{
             resp.json({status:"duplicate email"})
         }
     }
+})
+app.post('/api/login', async (req , resp )=>{
+    const {email, password } = req.body;
+    const user = await User.findOne({email:email,password: password})
+    if(user){
+        resp.json({status:"ok",user:"true"})
+    }
+    else resp.json({status:"error",user:"false"})
+    // resp.json({status:"ok"})
+    
 })
 app.listen(4000 , ()=>{
     console.log("running on port ${4000}")
