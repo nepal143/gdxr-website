@@ -30,10 +30,6 @@ function App() {
 
   return (
     <>
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
     {/* login part start here  */}
       <div className="register">
 
@@ -64,13 +60,6 @@ function App() {
         {/* form ends here  */}
 
       </div>
-<<<<<<< Updated upstream
-      {/* signin part ends here  */}
-=======
-      {/* login part ends here  */}
->>>>>>> Stashed changes
-
-
     </>
   );
 }
