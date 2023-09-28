@@ -12,13 +12,14 @@ body{
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
 
 }
 
 .register{
   width: 40vw;
+  margin: auto;
   padding-top: 5%;
   /* height: 50vh; */
   display: flex;
@@ -90,3 +91,73 @@ form{
   }
   
 }
+.container{
+  height: 100vh;
+
+}
+.BrandName{
+  font-size: 3.5vw;
+  margin: auto 5vw;
+}
+.navbar{
+  display: flex;
+  width: 100vw;
+  /* height: 30px; */
+  justify-content: space-between;
+  align-items: center;
+}
+a{
+  text-decoration: none;
+  margin: auto 1vw;
+  color: black;
+  transition: 1s;
+}
+a:hover{
+  text-decoration: underline;
+}
+.text_data_container{
+  display: flex;
+  justify-content: space-between;
+}
+.quote{
+  margin: auto 20px;
+  min-width: 25%;
+  font-size: 7vw;
+  text-align: center;
+
+}
+.aboutMe{
+  margin: auto 20px;
+  min-width: 25%;
+  max-width: 40%;
+  flex-wrap: wrap;
+}
+.profile_card{
+  margin: auto 20px;
+  min-width: 22%;
+  border: black solid ;
+  border-radius: 4vw;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+}
+.profilephoto{
+  width: 200px;
+  height: 200px;
+  border: solid black;
+  border-radius: 50%;
+  margin: 10px auto   ;
+}
+.personname{
+  font-size:2vw;
+}
+.line{
+  background-color: black;
+  width: 90%;
+  height: 1px;
+  margin: 10px auto ;
+}
+
+

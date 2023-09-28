@@ -24,6 +24,7 @@ function App() {
 
   return (
     <>
+    <div className="container">
 
     {/* registration part start here  */}
       <div className="register">
@@ -58,6 +59,7 @@ function App() {
       {/* registration part ends here  */}
 
 
+    </div>
     </>
   );
 }
