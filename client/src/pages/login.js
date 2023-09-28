@@ -1,4 +1,4 @@
-import "./App.css";
+import "./signin.css";
 import { useState } from "react";
 
 function App() {
@@ -19,12 +19,21 @@ function App() {
       })
     })
     const data = await response.json()
-    console.log(data)
+    if(data.user!=="false"){
+      window.location.href = "/home"
+    }
+    else{
+      alert("Invalid e-mail or password")
+    }
+
   }
 
   return (
     <>
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
     {/* login part start here  */}
       <div className="register">
 
@@ -55,7 +64,11 @@ function App() {
         {/* form ends here  */}
 
       </div>
+<<<<<<< Updated upstream
       {/* signin part ends here  */}
+=======
+      {/* login part ends here  */}
+>>>>>>> Stashed changes
 
 
     </>

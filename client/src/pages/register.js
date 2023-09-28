@@ -1,4 +1,4 @@
-import "./App.css";
+import "./signin.css";
 import { useState } from "react";
 
 function App() {
@@ -21,17 +21,23 @@ function App() {
       })
     })
     const data = await response.json()
+    console.log(data.user)
+    if(data.user!=="false"){
+      window.location.href = "/login"
+    }
+    else{
+      alert("Registeration failed")
+    }
     console.log(data)
   }
 
   return (
     <>
-
     {/* registration part start here  */}
       <div className="register">
 
         {/* Login heading  here  */}
-        <h1 className="login">LOGIN</h1>  
+        <h1 className="login">Register</h1>  
 
         {/* form starts here  */}
         <form onSubmit={registerUser}>
