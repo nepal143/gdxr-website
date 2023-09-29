@@ -6,7 +6,7 @@ const User = require("./models/user.models")
 app.use(cors())
 app.use(express.json())
 let connectionStatus = false
-const uri = "mongodb://localhost:27017/gdxr"
+const uri = "mongodb+srv://gdxr_website:gdxr_trial@cluster0.wnh37zr.mongodb.net/?retryWrites=true&w=majority&appName=AtlasApp"
 function connect(){
     try{
        mongoose.connect(uri)

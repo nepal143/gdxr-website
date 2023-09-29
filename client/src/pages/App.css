@@ -9,7 +9,7 @@
 body{
   width: 100vw;
   height: 100vh;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
   display: flex;
   flex-direction: column;
   /* justify-content: center; */
@@ -117,6 +117,7 @@ a:hover{
 }
 .text_data_container{
   display: flex;
+  /* flex-wrap: wrap; */
   justify-content: space-between;
 }
 .quote{
@@ -135,7 +136,9 @@ a:hover{
 .profile_card{
   margin: auto 20px;
   min-width: 22%;
-  border: black solid ;
+  /* border: black solid ;
+   */
+   box-shadow: 0px 0px 10000px rgba(0, 0, 0, 0.635) ;
   border-radius: 4vw;
   min-height: 400px;
   display: flex;
@@ -159,5 +162,24 @@ a:hover{
   height: 1px;
   margin: 10px auto ;
 }
-
+.Image_Videos{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.Image_Videos h2{
+  color: black;
+  margin: 5vw 10vw;
+  font-size: 3vw;
+}
+.img{
+  /* width:100px; */
+  height: 200px;
+  margin: auto 4vw;
+}
+.image_container{
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+}
 
