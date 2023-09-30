@@ -48,31 +48,34 @@ app.post('/api/login', async (req , resp )=>{
     // resp.json({status:"ok"})
 
 })
-connect()
-app.post('/api/quote', async (req , resp )=>{
-    try{
+app.post('/api/quote', async (req, resp) => {
+    try {
         const { quote } = req.body; 
-        console.log(quote) ;
-        const user = await Quote.findOne({email:user_email})
-        if(!user){
-            const quote1 = await Quote.create({email :user_email , quote: quote})
-            console.log("passed")
+        console.log(quote);
 
+
+        const user = await Quote.findOne({ email: user_email });
+ 
+        if (!user) { 
+
+            const quote1 = await Quote.create({ email: user_email, quote: quote });
+            console.log("New user and quote added");
+        } else {
+            // user.email = user_email ;
+            user.quote = quote;
+            await user.save();
+            console.log("Quote updated for existing user");
         }
-        else{
-            console.log("already exists");
-        }  
-        resp.json({status:"ok"})
-    }
-    catch(err){
-        // console.log(err) ;
-        // resp.json({status:"error",error:{err}})
-        if(err.code == 11000){
-            resp.json({status:"duplicate email"})
+
+        resp.json({ status: "ok" }); 
+    } catch (err) {
+        if (err.code === 11000) {
+            resp.json({ status: "duplicate email" });
+        } else {
+            resp.json({ status: "error", error: err });
         }
     }
-    
-})
+});
 app.listen(4000 , ()=>{
     console.log(`running on port ${4000}`)
 })
