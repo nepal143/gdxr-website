@@ -151,6 +151,9 @@ a:hover{
   height: 200px;
   border: solid black;
   border-radius: 50%;
+  background-image: url("./../../public/profile.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
   margin: 10px auto   ;
 }
 .personname{
@@ -182,4 +185,29 @@ a:hover{
   flex-wrap: nowrap;
   overflow-x: scroll;
 }
+.googlemaps{
+  display: flex;
+
+}
+.map{
+  width: 500px;
+  margin: 5vw;
+}
+.location{
+  font-size: 10vw;
+  /* word-wrap: break-word; */
+}
+.contactus{
+  /* display: flex;
+  justify-content: center;
+  /* flex-direction: column; */
+  /* align-items: center; */ 
+}
+.left_input{
+  width: 50%;
+}
+.inputs{
+  display: flex;
+}
+
 

@@ -1,10 +1,40 @@
 import React from 'react'
-
-export default function home() {
+import { useState } from "react";
+export default function Home() {
+  
+  const [quote, setQuote] =  useState("");
+  //Sending signup data to backend
+    async function userQuote(event){
+      event.preventDefault()
+      const response = await fetch("http://localhost:4000/api/quote",{
+        method:"POST",
+        headers:{
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          quote
+        })
+      })
+    
+      const data = await response.json()
+      console.log(data)
+    }
   return (
     <div>
       <div className="text_data_container">
-        <div className="quote">I am A MEARN developer </div>
+        <div className="quote">I am A MERN developer 
+        <form onSubmit={userQuote}>
+          <input // input for user name 
+            value={quote}
+            type="text"
+            className="name"
+            placeholder="Name"
+            onChange={(e) => setQuote(e.target.value)}
+          />
+
+          <input className="submit" type="submit" value="SIGN UP"  />
+        </form>
+        </div>
         <div className="profile_card">
             <div className="profilephoto"></div>
             <div className="personname">YOGESH NAHERA</div>
@@ -41,7 +71,28 @@ export default function home() {
         </div>
       </div>
 
-      <div className="googlemaps"></div>
+      <div className="googlemaps">
+        <img src="map.png" alt="" className="map" />
+
+        <div className="location">#My Location</div>
+
+      </div>
+
+      <div className="contactus">
+        <h2>CONTACT US</h2>
+        <div className="inputs">
+            <div className="left_input">
+              <input type="email" className="email" placeholder='Enter Your Email' />
+              <input type="email" className="email" placeholder='Enter Your Email' />
+
+            </div>
+            <div className="left_input">
+              <input type="email" className="email" placeholder='Enter Your Email' />
+              <input type="email" className="email" placeholder='Enter Your Email' />
+
+            </div>
+            </div>
+      </div>
     </div>
   )
 }
