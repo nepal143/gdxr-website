@@ -1,12 +1,31 @@
 import React from 'react'
-import { useState } from "react";
-export default function Home() {
-  
+import { useState,useEffect } from "react";
+import jwtDecode from 'jwt-decode'
+import {useNavigate} from 'react-router-dom'
+
+function Home() {
+
   const [quote, setQuote] =  useState("");
+  const [name, setName] =  useState("");
+  const [email, setEmail] =useState("")
+
   //Sending signup data to backend
+
+    async function setHome(){
+      const response = await fetch("http://localhost:4000/api/quote",{
+        method:"GET",
+        headers:{
+          "x-access-token":localStorage.getItem("token")
+        }
+      })
+      const data = await response.json()
+      setQuote(data.quote)
+      setName(data.name)
+      setEmail(data.email)
+    }
     async function userQuote(event){
       event.preventDefault()
-      const response = await fetch("http://localhost:4000/api/quote",{
+      const quoteResponse = await fetch("http://localhost:4000/api/quote",{
         method:"POST",
         headers:{
           "Content-Type": "application/json"
@@ -15,10 +34,31 @@ export default function Home() {
           quote
         })
       })
-    
-      const data = await response.json()
-      console.log(data)
+      const data = await quoteResponse.json()
+      setQuote(data.quote)
+      console.log(data.quote)
     }
+
+    const navigate = useNavigate()
+  useEffect(() => {
+      const token = localStorage.getItem("token");
+      // console.log(token)
+      if (token) {
+        const user = jwtDecode(token);
+        
+        setHome()
+        // console.log(user);
+        if (!user) {
+          localStorage.removeItem("token");
+          navigate("/login");
+        }
+      }
+      else{
+        navigate("/login")
+      }
+    }, []);
+
+
   return (
     <div>
       <div className="text_data_container">
@@ -28,23 +68,23 @@ export default function Home() {
             value={quote}
             type="text"
             className="name"
-            placeholder="Name"
+            placeholder="Quote"
             onChange={(e) => setQuote(e.target.value)}
           />
 
-          <input className="submit" type="submit" value="SIGN UP"  />
+          <input className="submit" type="submit" value="Save Quote"  />
         </form>
         </div>
         <div className="profile_card">
             <div className="profilephoto"></div>
-            <div className="personname">YOGESH NAHERA</div>
+            <div className="personname">{name}</div>
             <div className="line"></div>
             <div className="profession">student</div>
             <div className="institute">Army Institute Of Technology </div>
         </div>
         <div className="aboutMe">
-            <h2>ABOUT ME </h2>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sapiente magni delectus veniam? Corrupti eaque voluptatum vitae dicta nam, repellat saepe enim debitis dolorum ab quibusdam minus, distinctio deleniti optio totam atque ipsum laboriosam odio. Quos explicabo at magni laborum tempore officiis ea, nesciunt facere nam! Lorem ipsum dolor sit amet consectetur, adipisicing elit. Reiciendis ipsam, vero, impedit recusandae at illo dolorum eaque inventore similique, assumenda dolorem adipisci ipsum pariatur dolor blanditiis ducimus consequuntur? Suscipit, expedita. Lorem ?</p>
+            <h2>My Quote </h2>
+            <p>{quote}</p>
         </div>
       </div>
 
@@ -96,3 +136,4 @@ export default function Home() {
     </div>
   )
 }
+export default Home

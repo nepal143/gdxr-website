@@ -20,6 +20,13 @@ function App() {
     })
     const data = await response.json()
     console.log(data)
+    if(data.user!=="false"){
+      localStorage.setItem("token",data.user)
+      window.location.href = "/home"
+    }
+    else{
+      alert("Invalid e-mail or password")
+    }
   }
 
   return (

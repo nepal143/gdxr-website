@@ -4,6 +4,7 @@ const cors  = require("cors")
 const mongoose = require("mongoose")
 const User = require("./models/user.models");
 const Quote = require("./models/quote.models")
+const jwt = require("jsonwebtoken")
 app.use(cors())
 app.use(express.json()) 
 let connectionStatus = false; 
@@ -37,12 +38,15 @@ app.post('/api/register', async (req , resp )=>{
 })
 console.log(user_email)
 app.post('/api/login', async (req , resp )=>{
-    const {email_in, password_in } = req.body;
     console.log(req.body.email) 
     const user = await User.findOne({email:req.body.email,password: req.body.password})
-    user_email = req.body.email ; 
+    user_email = req.body.email ;
     if(user){
-        resp.json({status:"ok",user:"true"}) 
+        const token = jwt.sign({
+            email:user.email,
+            name:user.name
+        },"secret1234")
+        resp.json({status:"ok",user:token}) 
     }
     else resp.json({status:"error",user:"false"})
     // resp.json({status:"ok"})
@@ -52,8 +56,6 @@ app.post('/api/quote', async (req, resp) => {
     try {
         const { quote } = req.body; 
         console.log(quote);
-
-
         const user = await Quote.findOne({ email: user_email });
  
         if (!user) { 
@@ -67,7 +69,7 @@ app.post('/api/quote', async (req, resp) => {
             console.log("Quote updated for existing user");
         }
 
-        resp.json({ status: "ok" }); 
+        resp.json({ status: "ok" ,quote:quote}); 
     } catch (err) {
         if (err.code === 11000) {
             resp.json({ status: "duplicate email" });
@@ -76,6 +78,23 @@ app.post('/api/quote', async (req, resp) => {
         }
     }
 });
+
+app.get('/api/quote', async (req, resp) => {
+    const token = req.headers["x-access-token"]
+    console.log(token)
+    try{
+        const decoded = jwt.verify(token,"secret1234")
+        const email = decoded.email
+        const name = decoded.name
+        const user = await Quote.findOne({ email: user_email });
+        resp.json({status:"ok",quote:user.quote,name:decoded.name,email:decoded.email})
+    }
+    catch(err){
+        console.log(err)
+        resp.json({status:"error",error:"invalid-token"})
+    }
+});
+
 app.listen(4000 , ()=>{
     console.log(`running on port ${4000}`)
 })
