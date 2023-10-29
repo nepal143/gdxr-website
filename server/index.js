@@ -5,6 +5,10 @@ const mongoose = require("mongoose")
 const User = require("./models/user.models");
 const Quote = require("./models/quote.models")
 const jwt = require("jsonwebtoken")
+const Chance = require("chance")
+const nodemailer = require('nodemailer');
+let chance = new Chance();
+let code=chance.zip()
 app.use(cors())
 app.use(express.json()) 
 let connectionStatus = false; 
@@ -20,14 +24,13 @@ function connect(){
         console.error(err)
     }
 }
-
 connect()
 app.post('/api/register', async (req , resp )=>{
     try{
         const { name, email, password } = req.body;
         const user = await User.create({name,email,password})
         console.log("passed")
-        resp.json({status:"ok"})
+        resp.json({status:"ok",user:"ok"})
     }
     catch(err){
         // resp.json({status:"error",error:{err}})
@@ -84,9 +87,8 @@ app.get('/api/quote', async (req, resp) => {
     console.log(token)
     try{
         const decoded = jwt.verify(token,"secret1234")
-        const email = decoded.email
-        const name = decoded.name
-        const user = await Quote.findOne({ email: user_email });
+        
+        const user = await Quote.findOne({ email: decoded.email});
         resp.json({status:"ok",quote:user.quote,name:decoded.name,email:decoded.email})
     }
     catch(err){
@@ -94,6 +96,45 @@ app.get('/api/quote', async (req, resp) => {
         resp.json({status:"error",error:"invalid-token"})
     }
 });
+
+app.post('/api/sendCode',async(req,resp)=>{
+    const {email} = req.body
+    const user = await User.findOne({email:email})
+    if(user){
+        code = chance.zip()
+        console.log(code)
+        const transporter = nodemailer.createTransport({
+            service:"gmail",
+            secure: true,
+            pool:true,
+            auth: {
+            // TODO: replace `user` and `pass` values from <https://forwardemail.net>
+            user: "gdxr.reset@gmail.com",
+            pass: "isvc llwg zbuq wovw",
+            },
+        });
+        const  mailOptions = {
+            from: 'gdxr.reset@gmail.com',
+            to: email,
+            subject: `Password Reset!!`,
+            text: `Reset code is ${code}`
+        };
+        
+        transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+            console.log(error);
+            } else {
+            console.log('Email sent: ' + info.response);
+            }
+        });
+        transporter.close()
+        resp.json({status:"ok"})
+    }
+    else{
+        resp.json({status:"invalid"})
+    }
+
+})
 
 app.listen(4000 , ()=>{
     console.log(`running on port ${4000}`)
